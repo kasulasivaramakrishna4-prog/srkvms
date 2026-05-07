@@ -29,9 +29,10 @@ if "booking_date" not in booking_columns:
     with engine.begin() as connection:
         connection.execute(text("ALTER TABLE bookings ADD COLUMN booking_date DATE"))
 
-with engine.begin() as connection:
-    connection.execute(text("ALTER TABLE bookings MODIFY COLUMN phone VARCHAR(20)"))
-    connection.execute(text("ALTER TABLE bookings MODIFY COLUMN vehicle_id INT"))
+if engine.dialect.name == "mysql":
+    #with engine.begin() as connection:
+        #connection.execute(text("ALTER TABLE bookings MODIFY COLUMN phone VARCHAR(20)"))
+       # connection.execute(text("ALTER TABLE bookings MODIFY COLUMN vehicle_id INT"))
 
 app = FastAPI()
 
