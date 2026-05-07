@@ -1,4 +1,4 @@
-const API_URL = "/api";
+const API_URL = "https://your-railway-url.up.railway.app";
 
 const requestJson = async (url, options) => {
   const response = await fetch(url, options);
