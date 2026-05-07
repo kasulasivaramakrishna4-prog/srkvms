@@ -1,65 +1,48 @@
-import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import inspect, text
 from typing import List
 
-from database import Base, engine
+from Backend.database import Base, engine
 
-from schemas.vehicle_schema import Vehicle, VehicleResponse
-from schemas.enquiry_schema import Enquiry, EnquiryResponse
-from schemas.booking_schema import Booking, BookingResponse
-from schemas.service_schema import Service, ServiceResponse
+from Backend.schemas.vehicle_schema import Vehicle, VehicleResponse
+from Backend.schemas.enquiry_schema import Enquiry, EnquiryResponse
+from Backend.schemas.booking_schema import Booking, BookingResponse
+from Backend.schemas.service_schema import Service, ServiceResponse
 
-from services import vehicle_service
-from services import enquiry_service
-from services import booking_service
-from services import dashboard_service
-from services import service_service
+from Backend.services import vehicle_service
+from Backend.services import enquiry_service
+from Backend.services import booking_service
+from Backend.services import dashboard_service
+from Backend.services import service_service
 
-from models.vehicle_model import VehicleModel
-from models.enquiry_model import EnquiryModel
-from models.booking_model import BookingModel
-from models.service_model import ServiceModel
+from Backend.models.vehicle_model import VehicleModel
+from Backend.models.enquiry_model import EnquiryModel
+from Backend.models.booking_model import BookingModel
+from Backend.models.service_model import ServiceModel
 
 Base.metadata.create_all(bind=engine)
 
 inspector = inspect(engine)
 booking_columns = [column["name"] for column in inspector.get_columns("bookings")]
+
 if "booking_date" not in booking_columns:
     with engine.begin() as connection:
         connection.execute(text("ALTER TABLE bookings ADD COLUMN booking_date DATE"))
 
-if engine.dialect.name == "mysql":
-    with engine.begin() as connection:
-        connection.execute(text("ALTER TABLE bookings MODIFY COLUMN phone VARCHAR(20)"))
-        connection.execute(text("ALTER TABLE bookings MODIFY COLUMN vehicle_id INT"))
-
 app = FastAPI()
-
-allowed_origins = [
-    origin.strip()
-    for origin in os.getenv(
-        "CORS_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173",
-    ).split(",")
-    if origin.strip()
-]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://srkvms.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.middleware("http")
-async def strip_api_prefix(request, call_next):
-    if request.scope["path"].startswith("/api/"):
-        request.scope["path"] = request.scope["path"][4:]
-    return await call_next(request)
 
 
 @app.get("/")
@@ -79,7 +62,7 @@ def create_vehicle(vehicle: Vehicle):
         vehicle.brand,
         vehicle.price,
         vehicle.fuel_type,
-        vehicle.available
+        vehicle.available,
     )
 
 
@@ -104,7 +87,7 @@ def create_enquiry(enquiry: Enquiry):
         enquiry.customer_name,
         enquiry.phone,
         enquiry.vehicle_id,
-        enquiry.message
+        enquiry.message,
     )
 
 
@@ -119,7 +102,7 @@ def create_booking(booking: Booking):
         booking.customer_name,
         booking.phone,
         booking.vehicle_id,
-        booking.booking_date
+        booking.booking_date,
     )
 
 
@@ -137,7 +120,7 @@ def create_service(service: Service):
         service.service_type,
         service.service_date,
         service.delivery_date,
-        service.bill_amount
+        service.bill_amount,
     )
 
 
