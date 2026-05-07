@@ -34,42 +34,48 @@ export const getDashboard = () => {
   return fetch(`${BASE_URL}/dashboard`).then((res) => res.json());
 };
 
-export const addEnquiry = (data) => {
-  return fetch(`${BASE_URL}/enquiries`, {
+export const addEnquiry = async (data) => {
+  const response = await fetch(`${BASE_URL}/enquiries`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => res.json());
+  });
+
+  return response.json();
 };
 
 export const getEnquiries = () => {
   return fetch(`${BASE_URL}/enquiries`).then((res) => res.json());
 };
 
-export const addBooking = (data) => {
-  return fetch(`${BASE_URL}/bookings`, {
+export const addBooking = async (data) => {
+  const response = await fetch(`${BASE_URL}/bookings`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => res.json());
+  });
+
+  return response.json();
 };
 
 export const getBookings = () => {
   return fetch(`${BASE_URL}/bookings`).then((res) => res.json());
 };
 
-export const addService = (data) => {
-  return fetch(`${BASE_URL}/services`, {
+export const addService = async (data) => {
+  const response = await fetch(`${BASE_URL}/services`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => res.json());
+  });
+
+  return response.json();
 };
 
 export const getServices = () => {

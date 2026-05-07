@@ -54,6 +54,39 @@ button:hover {
   background: #1d4ed8;
 }
 
+.nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+th {
+  background: #2563eb;
+  color: white;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
 /* Vehicle Cards */
 .vehicle-card {
   background: white;
@@ -98,6 +131,7 @@ button:hover {
   border-radius: 14px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
 }
 
 .dashboard-card h3 {

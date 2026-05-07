@@ -19,21 +19,22 @@ function VehicleForm({ refresh }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    addVehicle({
+    await addVehicle({
       ...formData,
       price: Number(formData.price),
-    }).then(() => {
-      refresh();
-      setFormData({
-        name: "",
-        brand: "",
-        price: "",
-        fuel_type: "",
-        available: true,
-      });
+    });
+
+    await refresh();
+
+    setFormData({
+      name: "",
+      brand: "",
+      price: "",
+      fuel_type: "",
+      available: true,
     });
   };
 

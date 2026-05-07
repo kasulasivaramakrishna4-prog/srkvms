@@ -16,8 +16,8 @@ function Dashboard() {
     total_bill_amount: 0,
   });
 
-  const [enquiries, setEnquiries] = useState([]);
-  const [bookings, setBookings] = useState([]);
+  const [, setEnquiries] = useState([]);
+  const [, setBookings] = useState([]);
   const [services, setServices] = useState([]);
   const [showSection, setShowSection] = useState("");
 
