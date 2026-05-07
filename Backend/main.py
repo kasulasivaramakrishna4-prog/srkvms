@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import inspect, text
@@ -30,22 +31,35 @@ if "booking_date" not in booking_columns:
         connection.execute(text("ALTER TABLE bookings ADD COLUMN booking_date DATE"))
 
 if engine.dialect.name == "mysql":
-    #with engine.begin() as connection:
-        #connection.execute(text("ALTER TABLE bookings MODIFY COLUMN phone VARCHAR(20)"))
-       # connection.execute(text("ALTER TABLE bookings MODIFY COLUMN vehicle_id INT"))
+    with engine.begin() as connection:
+        connection.execute(text("ALTER TABLE bookings MODIFY COLUMN phone VARCHAR(20)"))
+        connection.execute(text("ALTER TABLE bookings MODIFY COLUMN vehicle_id INT"))
 
 app = FastAPI()
 
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:5173,http://127.0.0.1:5173",
+    ).split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def strip_api_prefix(request, call_next):
+    if request.scope["path"].startswith("/api/"):
+        request.scope["path"] = request.scope["path"][4:]
+    return await call_next(request)
 
 
 @app.get("/")

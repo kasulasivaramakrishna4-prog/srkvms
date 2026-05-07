@@ -1,83 +1,88 @@
-const BASE_URL = "http://127.0.0.1:8000";
+const API_URL = "/api";
+
+const requestJson = async (url, options) => {
+  const response = await fetch(url, options);
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.detail || data.error || "Request failed");
+  }
+
+  return data;
+};
 
 export const getVehicles = () => {
-  return fetch(`${BASE_URL}/vehicles`).then((res) => res.json());
+  return requestJson(`${API_URL}/vehicles`);
 };
 
 export const addVehicle = (data) => {
-  return fetch(`${BASE_URL}/vehicles`, {
+  return requestJson(`${API_URL}/vehicles`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => res.json());
+  });
 };
 
 export const updateVehicle = (id, data) => {
-  return fetch(`${BASE_URL}/vehicles/${id}`, {
+  return requestJson(`${API_URL}/vehicles/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => res.json());
+  });
 };
 
 export const deleteVehicle = (id) => {
-  return fetch(`${BASE_URL}/vehicles/${id}`, {
+  return requestJson(`${API_URL}/vehicles/${id}`, {
     method: "DELETE",
-  }).then((res) => res.json());
+  });
 };
 
 export const getDashboard = () => {
-  return fetch(`${BASE_URL}/dashboard`).then((res) => res.json());
+  return requestJson(`${API_URL}/dashboard`);
 };
 
 export const addEnquiry = async (data) => {
-  const response = await fetch(`${BASE_URL}/enquiries`, {
+  return requestJson(`${API_URL}/enquiries`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-
-  return response.json();
 };
 
 export const getEnquiries = () => {
-  return fetch(`${BASE_URL}/enquiries`).then((res) => res.json());
+  return requestJson(`${API_URL}/enquiries`);
 };
 
 export const addBooking = async (data) => {
-  const response = await fetch(`${BASE_URL}/bookings`, {
+  return requestJson(`${API_URL}/bookings`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-
-  return response.json();
 };
 
 export const getBookings = () => {
-  return fetch(`${BASE_URL}/bookings`).then((res) => res.json());
+  return requestJson(`${API_URL}/bookings`);
 };
 
 export const addService = async (data) => {
-  const response = await fetch(`${BASE_URL}/services`, {
+  return requestJson(`${API_URL}/services`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-
-  return response.json();
 };
 
 export const getServices = () => {
-  return fetch(`${BASE_URL}/services`).then((res) => res.json());
+  return requestJson(`${API_URL}/services`);
 };

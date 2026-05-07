@@ -22,7 +22,7 @@ def get_dashboard_stats():
     total_bill_amount = 0
 
     for service in service_records:
-        total_bill_amount += service.bill_amount
+        total_bill_amount += service.bill_amount or 0
 
     db.close()
 

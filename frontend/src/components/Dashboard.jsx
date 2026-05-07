@@ -78,7 +78,7 @@ function Dashboard() {
 
         <div className="dashboard-card teal">
           <h3>Total Bill Amount</h3>
-          <p>₹{stats.total_bill_amount}</p>
+          <p>Rs. {stats.total_bill_amount}</p>
         </div>
       </div>
 
@@ -102,7 +102,7 @@ function Dashboard() {
                 <p><b>Service Type:</b> {s.service_type}</p>
                 <p><b>Service Date:</b> {s.service_date}</p>
                 <p><b>Delivery Date:</b> {s.delivery_date}</p>
-                <p><b>Bill:</b> ₹{s.bill_amount}</p>
+                <p><b>Bill:</b> Rs. {s.bill_amount}</p>
               </div>
             ))
           )}
