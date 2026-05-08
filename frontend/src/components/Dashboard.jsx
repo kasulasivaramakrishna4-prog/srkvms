@@ -16,8 +16,8 @@ function Dashboard() {
     total_bill_amount: 0,
   });
 
-  const [, setEnquiries] = useState([]);
-  const [, setBookings] = useState([]);
+  const [enquiries, setEnquiries] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [services, setServices] = useState([]);
   const [showSection, setShowSection] = useState("");
 
@@ -61,17 +61,26 @@ function Dashboard() {
           <p>{stats.available_vehicles}</p>
         </div>
 
-        <div className="dashboard-card orange clickable" onClick={handleShowEnquiries}>
+        <div
+          className="dashboard-card orange clickable"
+          onClick={handleShowEnquiries}
+        >
           <h3>Total Enquiries</h3>
           <p>{stats.total_enquiries}</p>
         </div>
 
-        <div className="dashboard-card purple clickable" onClick={handleShowBookings}>
+        <div
+          className="dashboard-card purple clickable"
+          onClick={handleShowBookings}
+        >
           <h3>Total Bookings</h3>
           <p>{stats.total_bookings}</p>
         </div>
 
-        <div className="dashboard-card red clickable" onClick={handleShowServices}>
+        <div
+          className="dashboard-card red clickable"
+          onClick={handleShowServices}
+        >
           <h3>Total Services</h3>
           <p>{stats.total_services}</p>
         </div>
@@ -81,6 +90,54 @@ function Dashboard() {
           <p>Rs. {stats.total_bill_amount}</p>
         </div>
       </div>
+
+      {showSection === "enquiries" && (
+        <div className="details-box">
+          <div className="details-header">
+            <h2>Enquiries</h2>
+            <button className="close-btn" onClick={() => setShowSection("")}>
+              Close
+            </button>
+          </div>
+
+          {enquiries.length === 0 ? (
+            <p>No enquiries found</p>
+          ) : (
+            enquiries.map((e) => (
+              <div className="details-card" key={e.id}>
+                <p><b>Name:</b> {e.customer_name}</p>
+                <p><b>Phone:</b> {e.phone}</p>
+                <p><b>Vehicle ID:</b> {e.vehicle_id}</p>
+                <p><b>Message:</b> {e.message}</p>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {showSection === "bookings" && (
+        <div className="details-box">
+          <div className="details-header">
+            <h2>Bookings</h2>
+            <button className="close-btn" onClick={() => setShowSection("")}>
+              Close
+            </button>
+          </div>
+
+          {bookings.length === 0 ? (
+            <p>No bookings found</p>
+          ) : (
+            bookings.map((b) => (
+              <div className="details-card" key={b.id}>
+                <p><b>Name:</b> {b.customer_name}</p>
+                <p><b>Phone:</b> {b.phone}</p>
+                <p><b>Vehicle ID:</b> {b.vehicle_id}</p>
+                <p><b>Booking Date:</b> {b.booking_date}</p>
+              </div>
+            ))
+          )}
+        </div>
+      )}
 
       {showSection === "services" && (
         <div className="details-box">
