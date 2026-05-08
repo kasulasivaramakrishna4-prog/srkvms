@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Date, Float
-from database import Base
+from Backend.database import Base
 
 class ServiceModel(Base):
     __tablename__ = "services"

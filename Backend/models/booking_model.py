@@ -1,5 +1,5 @@
 from sqlalchemy import Column,Integer,String,Date
-from database import Base
+from Backend.database import Base
 
 class BookingModel(Base):
     __tablename__="bookings"
