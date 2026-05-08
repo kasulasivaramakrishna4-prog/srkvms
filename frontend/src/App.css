@@ -217,3 +217,51 @@ tr:last-child td {
 .close-btn:hover {
   background: #b91c1c;
 }
+
+@media (max-width: 768px) {
+  .app {
+    width: 100%;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .nav-buttons {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nav-buttons button,
+  .close-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  form {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  form input,
+  form select,
+  form button {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
