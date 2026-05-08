@@ -1,4 +1,4 @@
-from database import SessionLocal
+from Backend.database import SessionLocal
 from models.vehicle_model import VehicleModel
 
 
