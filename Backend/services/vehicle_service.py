@@ -1,5 +1,5 @@
 from Backend.database import SessionLocal
-from models.vehicle_model import VehicleModel
+from Backend.models.vehicle_model import VehicleModel
 
 
 def create_vehicle(name, brand, price, fuel_type, available):

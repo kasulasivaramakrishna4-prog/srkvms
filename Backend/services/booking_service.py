@@ -1,5 +1,5 @@
-from database import SessionLocal
-from models.booking_model import BookingModel
+from Backend.database import SessionLocal
+from Backend.models.booking_model import BookingModel
 
 
 def create_booking(customer_name, phone, vehicle_id, booking_date):

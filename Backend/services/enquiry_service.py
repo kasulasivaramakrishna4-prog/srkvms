@@ -1,5 +1,5 @@
-from database import SessionLocal
-from models.enquiry_model import EnquiryModel
+from Backend.database import SessionLocal
+from Backend.models.enquiry_model import EnquiryModel
 
 
 def create_enquiry(customer_name, phone, vehicle_id, message):

@@ -1,8 +1,8 @@
-from database import SessionLocal
-from models.vehicle_model import VehicleModel
-from models.enquiry_model import EnquiryModel
-from models.booking_model import BookingModel
-from models.service_model import ServiceModel
+from Backend.database import SessionLocal
+from Backend.models.vehicle_model import VehicleModel
+from Backend.models.enquiry_model import EnquiryModel
+from Backend.models.booking_model import BookingModel
+from Backend.models.service_model import ServiceModel
 
 
 def get_dashboard_stats():

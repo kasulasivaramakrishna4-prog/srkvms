@@ -1,5 +1,5 @@
-from database import SessionLocal
-from models.service_model import ServiceModel
+from Backend.database import SessionLocal
+from Backend.models.service_model import ServiceModel
 
 
 def create_service(customer_name, phone, vehicle_id, service_type, service_date, delivery_date, bill_amount):
