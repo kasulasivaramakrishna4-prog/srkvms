@@ -238,10 +238,17 @@ tr:last-child td {
 }
 
 @media (max-width: 768px) {
+  #root {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
   .app {
-    width: 100vw;
-    max-width: 100vw;
-    padding: 10px;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px !important;
   }
 
   h1 {
@@ -280,6 +287,18 @@ tr:last-child td {
   form select,
   form button {
     width: 100%;
+  }
+
+  input,
+  button {
+    width: 100%;
+    max-width: 100%;
+    margin: 6px 0;
+  }
+
+  .dashboard-card {
+    width: 100%;
+    max-width: 100%;
   }
 
   table {
